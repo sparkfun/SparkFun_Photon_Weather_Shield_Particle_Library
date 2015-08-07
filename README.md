@@ -29,36 +29,36 @@ Then use the `Weather` object to interact with it. Begin by initializing the IC:
 
 The Setup
 
-  void setup()
-  {
-    Serial.begin(9600);
-
-    Serial.println("Press any key to begin");
-    //This line pauses the Serial port until a key is pressed
-    while(!Serial.available()) Spark.process();
-  
-    //Initialize the I2C sensors and ping them
-    checkDevices();
-  
-    //MPL3115A2 Settings
-    //baro.setModeBarometer();//Set to Barometer Mode
-    sensor.setModeAltimeter();//Set to altimeter Mode
-  
-    sensor.setOversampleRate(7); // Set Oversample to the recommended 128
-    sensor.enableEventFlags(); //Necessary register calls to enble temp, baro ansd alt
-  
-    // To change resolution of the Temp/Humidity sensor, use
-    // sensor.changeResolution(int i) where i=[0-3],
-    //sensor.changeResolution(0);
-  }
+	void setup()
+	{
+	  Serial.begin(9600);
+	
+	  Serial.println("Press any key to begin");
+	  //This line pauses the Serial port until a key is pressed
+	  while(!Serial.available()) Spark.process();
+	
+	  //Initialize the I2C sensors and ping them
+	  checkDevices();
+	
+	  //MPL3115A2 Settings
+	  //baro.setModeBarometer();//Set to Barometer Mode
+	  sensor.setModeAltimeter();//Set to altimeter Mode
+	
+	  sensor.setOversampleRate(7); // Set Oversample to the recommended 128
+	  sensor.enableEventFlags(); //Necessary register calls to enble temp, baro ansd alt
+	
+	  // To change resolution of the Temp/Humidity sensor, use
+	  // sensor.changeResolution(int i) where i=[0-3],
+	  //sensor.changeResolution(0);
+	}
 
 Then you can read various data like this:
 
-  rh = sensor.getRH();
-  t = sensor.getTempF();
-  pascals = sensor.readPressure();
-  altf = sensor.readAltitudeFt();
-  baroTemp = sensor.readBaroTempF();
+	 rh = sensor.getRH();
+	 t = sensor.getTempF();
+	 pascals = sensor.readPressure();
+	 altf = sensor.readAltitudeFt();
+	 baroTemp = sensor.readBaroTempF();
 	
 Check out the example files in the [examples directory]() for more guidance.
 
