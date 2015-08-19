@@ -26,7 +26,7 @@
  https://github.com/romainmp/HTU21D
 
  Arduino Si7010 relative humidity + temperature sensor
- Jakub Kaminski, 2014
+ By: Jakub Kaminski, 2014
  https://github.com/teoqba/ADDRESS
 
  This Library is free software: you can redistribute it and/or modify
