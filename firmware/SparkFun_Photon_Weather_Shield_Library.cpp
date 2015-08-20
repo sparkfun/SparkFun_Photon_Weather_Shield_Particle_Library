@@ -48,7 +48,7 @@
  //Initialize
  Weather::Weather(){}
 
- int Weather::begin(void)
+ void Weather::begin(void)
 {
   Wire.begin();
 
@@ -57,12 +57,12 @@
 
   int x,y = 0;
 
-  if (ID_Barro == 0xC4)
+  if (ID_Barro == 0xC4)//Ping WhoAmI register
     x = 1;
   else
   	x = 0;
 
-  if(ID_Temp_Hum == 0x15)
+  if(ID_Temp_Hum == 0x15)//Ping CheckID register
     y = 1;
   else if(ID_Temp_Hum == 0x32)
     y = 2;
@@ -70,17 +70,32 @@
     y = 0;
 
   if(x == 1 && y == 1)
-    return 1;//MPL Detected & Si7021 Detected
+  {
+    Serial.println("MPL3115A2 Found");
+    Serial.println("Si7021 Found");
+  }
   else if(x == 1 && y == 2)
-  	return 2;//MPL Detected & HTU21D Detected
+  {
+    Serial.println("MPL3115A2 Found");
+    Serial.println("HTU21D Found");
+  }
   else if(x == 0 && y == 1)
-  	return 3;//MPL NOT Detected but Si7021 Detected
+  {
+    Serial.println("MPL3115A2 NOT Found");
+    Serial.println("Si7021 Found");
+  }
   else if(x == 0 && y == 2)
-  	return 4;//MPL NOT Detected but HTU21D Detected
+  {
+    Serial.println("MPL3115A2 NOT Found");
+    Serial.println("HTU21D Found");
+  }
   else if(x == 1 && y == 0)
-  	return 5;//MPL Detected but No Temp/Humidity Sensor Detected
+  {
+    Serial.println("MPL3115A2 Found");
+    Serial.println("No Temp/Humidity Device Detected");
+  }
   else
-  	return -1;//No devices detected
+  	Serial.println("No Devices Detected");
 }
 
 /****************Si7021 & HTU21D Functions**************************************/

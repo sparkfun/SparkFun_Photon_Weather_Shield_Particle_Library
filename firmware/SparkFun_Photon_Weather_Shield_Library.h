@@ -128,7 +128,7 @@ public:
 	// Constructor
 	Weather();
 
-	int  begin();
+	void  begin();
 
 	// Si7021 & HTU21D Public Functions
 	float getRH();
