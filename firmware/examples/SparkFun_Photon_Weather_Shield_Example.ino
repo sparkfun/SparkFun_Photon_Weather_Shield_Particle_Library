@@ -1,9 +1,9 @@
 /******************************************************************************
-  SparkFun_Photon_Weather_Basic_Soil.ino
-  SparkFun Photon Weather Shield basic example with soil moisture and temp
+  SparkFun Photon Weather Shield basic example
   Joel Bartlett @ SparkFun Electronics
   Original Creation Date: May 18, 2015
-  This sketch prints the temperature, humidity, and barrometric preassure or
+  Updated August 21, 2015
+  This sketch prints the temperature, humidity, and barrometric preassure OR
   altitude to the Seril port.
 
   The library used in this example can be found here:
