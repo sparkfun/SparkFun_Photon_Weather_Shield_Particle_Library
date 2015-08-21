@@ -31,36 +31,56 @@ The Setup
 
 	void setup()
 	{
-	  Serial.begin(9600);
-	
-	  Serial.println("Press any key to begin");
-	  //This line pauses the Serial port until a key is pressed
-	  while(!Serial.available()) Spark.process();
-	
-	  //Initialize the I2C sensors and ping them
-	  checkDevices();
-	
-	  //MPL3115A2 Settings
-	  //baro.setModeBarometer();//Set to Barometer Mode
-	  sensor.setModeAltimeter();//Set to altimeter Mode
-	
-	  sensor.setOversampleRate(7); // Set Oversample to the recommended 128
-	  sensor.enableEventFlags(); //Necessary register calls to enble temp, baro ansd alt
-	
-	  // To change resolution of the Temp/Humidity sensor, use
-	  // sensor.changeResolution(int i) where i=[0-3],
-	  //sensor.changeResolution(0);
+    Serial.begin(9600);   // open serial over USB at 9600 baud
+
+    // Make sure your Serial Terminal app is closed before powering your device
+    // Now open your Serial Terminal, and hit any key to continue!
+    Serial.println("Press any key to begin");
+    //This line pauses the Serial port until a key is pressed
+    while(!Serial.available()) Spark.process();
+
+    //Initialize the I2C sensors and ping them
+    sensor.begin();
+
+    /*You can only receive acurate barrometric readings or acurate altitiude
+    readings at a given time, not both at the same time. The following two lines
+    tell the sensor what mode to use. You could easily write a function that
+    takes a reading in one made and then switches to the other mode to grab that
+    reading, resulting in data that contains both acurate altitude and barrometric
+    readings. For this example, we will only be using the barometer mode. Be sure
+    to only uncomment one line at a time. */
+    sensor.setModeBarometer();//Set to Barometer Mode
+    //baro.setModeAltimeter();//Set to altimeter Mode
+
+    //These are additional MPL3115A2 functions the MUST be called for the sensor to work.
+    sensor.setOversampleRate(7); // Set Oversample rate
+    //Call with a rate from 0 to 7. See page 33 for table of ratios.
+    //Sets the over sample rate. Datasheet calls for 128 but you can set it
+    //from 1 to 128 samples. The higher the oversample rate the greater
+    //the time between data samples.
+
+
+    sensor.enableEventFlags(); //Necessary register calls to enble temp, baro ansd alt
 	}
 
 Then you can read various data like this:
 
-	 rh = sensor.getRH();
-	 t = sensor.getTempF();
-	 pascals = sensor.readPressure();
-	 altf = sensor.readAltitudeFt();
-	 baroTemp = sensor.readBaroTempF();
+	// Measure Relative Humidity from the HTU21D or Si7021
+	humidity = sensor.getRH();
 	
-Check out the example files in the [examples directory]() for more guidance.
+	// Measure Temperature from the HTU21D or Si7021
+	tempf = sensor.getTempF();
+	
+	//Measure the Barometer temperature in F from the MPL3115A2
+	baroTemp = sensor.readBaroTempF();
+	
+	//Measure Pressure from the MPL3115A2
+	pascals = sensor.readPressure();
+	
+	//If in altitude mode, you can get a reading in feet with this line:
+    altf = sensor.readAltitudeFt();
+	
+Check out the example files in the [examples directory](https://github.com/sparkfun/SparkFun_Photon_Weather_Shield_Particle_Library/tree/master/firmware/examples) for more guidance.
 
 Recommended Components
 -------------------

@@ -132,7 +132,7 @@ void printInfo()
   Serial.print(humidity);
   Serial.print("%, ");
 
-  Serial.print("Baro Temp:");
+  Serial.print("Baro_Temp:");
   Serial.print(baroTemp);
   Serial.print("F, ");
 
