@@ -138,10 +138,16 @@ void printInfo()
 
   Serial.print("Pressure:");
   Serial.print(pascals/100);
-  Serial.println("hPa, ");
+  Serial.print("hPa, ");
+  Serial.print((pascals/100) * 0.0295300);
+  Serial.println("in.Hg");
   //The MPL3115A2 outputs the pressure in Pascals. However, most weather stations
   //report pressure in hectopascals or millibars. Divide by 100 to get a reading
   //more closely resembling what online weather reports may say in hPa or mb.
+  //Another common unit for pressure is Inches of Mercury (in.Hg). To convert
+  //from mb to in.Hg, use the following formula. P(inHg) = 0.0295300 * P(mb)
+  //More info on conversion can be found here:
+  //www.srh.noaa.gov/images/epz/wxcalc/pressureConversion.pdf
 
   //If in altitude mode, print with these lines
   //Serial.print("Altitude:");
