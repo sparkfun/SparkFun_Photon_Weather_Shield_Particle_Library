@@ -4,7 +4,7 @@
   Original Creation Date: May 18, 2015
   Updated August 21, 2015
   This sketch prints the temperature, humidity, and barrometric preassure OR
-  altitude to the Seril port.
+  altitude to the Serial port.
 
   The library used in this example can be found here:
   https://github.com/sparkfun/SparkFun_Photon_Weather_Shield_Particle_Library
