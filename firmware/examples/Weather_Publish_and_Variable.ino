@@ -38,12 +38,12 @@
 *******************************************************************************/
 #include "SparkFun_Photon_Weather_Shield_Library/SparkFun_Photon_Weather_Shield_Library.h"
 
-float humidity = 0;
-float tempf = 0;
-float pascals = 0;
-float baroTemp = 0;
+double humidity = 0;
+double tempf = 0;
+double pascals = 0;
+double baroTemp = 0;
 
-long lastPrint = 0;
+long lastPublish = 0;
 
 //Create Instance of HTU21D or SI7021 temp and humidity sensor and MPL3115A2 barometric sensor
 Weather sensor;
@@ -51,13 +51,11 @@ Weather sensor;
 //---------------------------------------------------------------
 void setup()
 {
-    Serial.begin(9600);   // open serial over USB at 9600 baud
-
-    // Make sure your Serial Terminal app is closed before powering your device
-    // Now open your Serial Terminal, and hit any key to continue!
-    Serial.println("Press any key to begin");
-    //This line pauses the Serial port until a key is pressed
-    while(!Serial.available()) Spark.process();
+    // Create Particle.variables for each piece of data for easy access
+    Particle.variable("humidity", humidity);
+    Particle.variable("tempF", tempf);
+    Particle.variable("pressurePascals", pascals);
+    Particle.variable("baroTemp", baroTemp);
 
     //Initialize the I2C sensors and ping them
     sensor.begin();
@@ -90,13 +88,17 @@ void loop()
       getWeather();
 
       // This math looks at the current time vs the last time a publish happened
-      if(millis() - lastPrint > 5000) //Publishes every 5000 milliseconds, or 5 seconds
+      if(millis() - lastPublish > 5000) //Publishes every 5000 milliseconds, or 5 seconds
       {
         // Record when you published
-        lastPrint = millis();
+        lastPublish = millis();
 
-        // Use the printInfo() function to print data out to Serial
-        printInfo();
+        // Choose which values you actually want to publish- remember, if you're
+        // publishing more than once per second on average, you'll be throttled!
+        Particle.publish("humidity", String(humidity));
+        Particle.publish("tempF", String(tempf));
+        //Particle.variable("pressurePascals", pascals);
+        //Particle.variable("baroTemp", baroTemp);
       }
 }
 //---------------------------------------------------------------
@@ -119,40 +121,4 @@ void getWeather()
 
   //If in altitude mode, you can get a reading in feet with this line:
   //float altf = sensor.readAltitudeFt();
-}
-//---------------------------------------------------------------
-void printInfo()
-{
-//This function prints the weather data out to the default Serial Port
-
-  Serial.print("Temp:");
-  Serial.print(tempf);
-  Serial.print("F, ");
-
-  Serial.print("Humidity:");
-  Serial.print(humidity);
-  Serial.print("%, ");
-
-  Serial.print("Baro_Temp:");
-  Serial.print(baroTemp);
-  Serial.print("F, ");
-
-  Serial.print("Pressure:");
-  Serial.print(pascals/100);
-  Serial.print("hPa, ");
-  Serial.print((pascals/100) * 0.0295300);
-  Serial.println("in.Hg");
-  //The MPL3115A2 outputs the pressure in Pascals. However, most weather stations
-  //report pressure in hectopascals or millibars. Divide by 100 to get a reading
-  //more closely resembling what online weather reports may say in hPa or mb.
-  //Another common unit for pressure is Inches of Mercury (in.Hg). To convert
-  //from mb to in.Hg, use the following formula. P(inHg) = 0.0295300 * P(mb)
-  //More info on conversion can be found here:
-  //www.srh.noaa.gov/images/epz/wxcalc/pressureConversion.pdf
-
-  //If in altitude mode, print with these lines
-  //Serial.print("Altitude:");
-  //Serial.print(altf);
-  //Serial.println("ft.");
-
 }

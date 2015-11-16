@@ -2,6 +2,6 @@
   "name": "SparkFun_Photon_Weather_Shield_Library",
   "author": "Joel Bartlett <joel.bartlett@sparkfun.com>",
   "license": "MIT",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A library to support all I2C sensors on the SparkFun Photon Weather Shield."
 }
