@@ -68,7 +68,7 @@ void setup()
     readings. For this example, we will only be using the barometer mode. Be sure
     to only uncomment one line at a time. */
     sensor.setModeBarometer();//Set to Barometer Mode
-    //baro.setModeAltimeter();//Set to altimeter Mode
+    //sensor.setModeAltimeter();//Set to altimeter Mode
 
     //These are additional MPL3115A2 functions that MUST be called for the sensor to work.
     sensor.setOversampleRate(7); // Set Oversample rate

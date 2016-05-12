@@ -11,10 +11,10 @@ This is a firmware library for [SparkFun's Photon Weather Shield](https://www.sp
 Repository Contents
 -------------------
 
-* **/doc** - Additional documentation for the user. These files are ignored by the IDE. 
+* **/doc** - Additional documentation for the user. These files are ignored by the IDE.
 * **/firmware** - Source files for the library (.cpp, .h).
-* **/firmware/examples** - Example sketches for the library (.cpp). Run these from the Particle IDE. 
-* **spark.json** - General library properties for the Particel library manager. 
+* **/firmware/examples** - Example sketches for the library (.cpp). Run these from the Particle IDE.
+* **spark.json** - General library properties for the Particel library manager.
 
 Example Usage
 -------------------
@@ -22,7 +22,7 @@ Example Usage
 Include the library:
 
 	#include "SparkFunMPL3115A2.h" // Include the SparkFun MPL3115A2 library
-	
+
 Then use the `Weather` object to interact with it. Begin by initializing the IC:
 
 	Weather sensor;//Create Instance of Weather Class
@@ -50,7 +50,7 @@ The Setup
     readings. For this example, we will only be using the barometer mode. Be sure
     to only uncomment one line at a time. */
     sensor.setModeBarometer();//Set to Barometer Mode
-    //baro.setModeAltimeter();//Set to altimeter Mode
+    //sensor.setModeAltimeter();//Set to altimeter Mode
 
     //These are additional MPL3115A2 functions the MUST be called for the sensor to work.
     sensor.setOversampleRate(7); // Set Oversample rate
@@ -67,19 +67,19 @@ Then you can read various data like this:
 
 	// Measure Relative Humidity from the HTU21D or Si7021
 	humidity = sensor.getRH();
-	
+
 	// Measure Temperature from the HTU21D or Si7021
 	tempf = sensor.getTempF();
-	
+
 	//Measure the Barometer temperature in F from the MPL3115A2
 	baroTemp = sensor.readBaroTempF();
-	
+
 	//Measure Pressure from the MPL3115A2
 	pascals = sensor.readPressure();
-	
+
 	//If in altitude mode, you can get a reading in feet with this line:
     altf = sensor.readAltitudeFt();
-	
+
 Check out the example files in the [examples directory](https://github.com/sparkfun/SparkFun_Photon_Weather_Shield_Particle_Library/tree/master/firmware/examples) for more guidance.
 
 Recommended Components
@@ -91,9 +91,9 @@ Recommended Components
 License Information
 -------------------
 
-This product is _**open source**_! 
+This product is _**open source**_!
 
-Please review the LICENSE.md file for license information. 
+Please review the LICENSE.md file for license information.
 
 If you have any questions or concerns on licensing, please contact techsupport@sparkfun.com.
 
