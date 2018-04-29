@@ -25,13 +25,13 @@ Include the library:
 
 Then use the `Weather` object to interact with it. Begin by initializing the IC:
 
-	Weather sensor;//Create Instance of Weather Class
+	Weather sensor; //Create Instance of Weather Class
 
 The Setup
 
 	void setup()
 	{
-    Serial.begin(9600);   // open serial over USB at 9600 baud
+    Serial.begin(9600);  // open serial over USB at 9600 baud
 
     // Make sure your Serial Terminal app is closed before powering your device
     // Now open your Serial Terminal, and hit any key to continue!
@@ -42,11 +42,11 @@ The Setup
     //Initialize the I2C sensors and ping them
     sensor.begin();
 
-    /*You can only receive acurate barrometric readings or acurate altitiude
+    /*You can only receive accurate barometric readings or accurate altitiude
     readings at a given time, not both at the same time. The following two lines
     tell the sensor what mode to use. You could easily write a function that
-    takes a reading in one made and then switches to the other mode to grab that
-    reading, resulting in data that contains both acurate altitude and barrometric
+    takes a reading in one mode and then switches to the other mode to grab that
+    reading, resulting in data that contains both accurate altitude and barometric
     readings. For this example, we will only be using the barometer mode. Be sure
     to only uncomment one line at a time. */
     sensor.setModeBarometer();//Set to Barometer Mode
@@ -60,7 +60,7 @@ The Setup
     //the time between data samples.
 
 
-    sensor.enableEventFlags(); //Necessary register calls to enble temp, baro ansd alt
+    sensor.enableEventFlags(); //Necessary register calls to enble temp, baro and alt
 	}
 
 Then you can read various data like this:
@@ -95,7 +95,7 @@ This product is _**open source**_!
 
 Please review the LICENSE.md file for license information.
 
-If you have any questions or concerns on licensing, please contact techsupport@sparkfun.com.
+If you have any questions or concerns about licensing, please contact techsupport@sparkfun.com.
 
 Distributed as-is; no warranty is given.
 
